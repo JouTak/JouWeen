@@ -4,13 +4,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.joutak.jouween.JouWeen;
 import org.joutak.jouween.config.JouWeenConfig;
+import org.joutak.jouween.jack.data.JackData;
 
 public class MoonSwitcher {
 
     public void register() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(JouWeen.getInstance(), () -> {
             checkNightTime();
-            switchPlayerQuests();
+            checkMidnight();
         }, 0, 20);
     }
 
@@ -20,6 +21,14 @@ public class MoonSwitcher {
         }
         Bukkit.getOnlinePlayers().stream()
                 .forEach(this::switchPlayerMoonPhase);
+    }
+
+    private void checkMidnight() {
+        if (!(Bukkit.getWorld(JouWeenConfig.getInstance().worldName).getTime() >= 18000 && Bukkit.getWorld(JouWeenConfig.getInstance().worldName).getTime() <= 18020)) {
+            return;
+        }
+
+        JackData.getInstance().switchPlayersCanTakeQuests();
     }
 
     public void switchPlayerMoonPhase(Player player) {
@@ -33,7 +42,4 @@ public class MoonSwitcher {
 
     }
 
-    private void switchPlayerQuests() {
-
-    }
 }

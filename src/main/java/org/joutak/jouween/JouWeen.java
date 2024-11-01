@@ -9,8 +9,9 @@ import org.joutak.jouween.config.JouWeenConfig;
 import org.joutak.jouween.jack.Jack;
 import org.joutak.jouween.jack.data.JackData;
 import org.joutak.jouween.jack.events.JackPlayerInteractEvent;
-import org.joutak.jouween.jack.quests.AllQuests;
-import org.joutak.jouween.jack.quests.NormalZombieBottles;
+import org.joutak.jouween.jack.quests.*;
+import org.joutak.jouween.jack.quests.ArmorQuests.DiamondChestPlateQuest;
+import org.joutak.jouween.jack.quests.BottleQuests.*;
 import org.joutak.jouween.mobs.event.*;
 import org.joutak.jouween.mobs.AllMobTypes;
 import org.joutak.jouween.mobs.mob.*;
@@ -41,11 +42,12 @@ public final class JouWeen extends JavaPlugin {
         new JouWeenCommands();
         new JackDialogueCommands();
 
-        addMobs();
-        addQuests();
         new JackData().read();
         new JouWeenConfig().read();
         new MoonSwitcher().register();
+
+        addMobs();
+        addQuests();
 
         doAfterStart();
 
@@ -69,6 +71,13 @@ public final class JouWeen extends JavaPlugin {
 
     private void addQuests() {
         AllQuests.addQuest(new NormalZombieBottles(1,100, 1));
+        AllQuests.addQuest(new NormalSkeletonsBottles(2,100, 1));
+        AllQuests.addQuest(new FastZombieBottles(3,100, 1));
+        AllQuests.addQuest(new EyeBottles(4,100, 1));
+        AllQuests.addQuest(new EvokerBottles(5,100, 1));
+        AllQuests.addQuest(new SkeletonOnHorseBottles(6,100, 1));
+        AllQuests.addQuest(new StrongZombieBottles(7,100, 1));
+        AllQuests.addQuest(new DiamondChestPlateQuest(8,100000, 1));
     }
 
     private void doAfterStart(){

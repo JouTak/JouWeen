@@ -49,6 +49,66 @@ public class JackData {
     @Getter
     public List<JackQuestPlayerData> playerDataList = new ArrayList<>();
 
+    @Expose
+    @Getter
+    @Setter
+    public int helmetX = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int helmetY = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int helmetZ = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int chestplateX = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int chestplateY = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int chestplateZ = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int pantsX = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int pantsY = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int pantsZ = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int bootsX = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int bootsY = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int bootsZ = 0;
+
     public void read() {
         JackData jackData = new JackFileReader(JouweenConst.JACK_FILEPATH).readJack();
         this.x = jackData.x;
@@ -57,6 +117,18 @@ public class JackData {
         this.completedQuests = jackData.completedQuests;
         this.neededQuests = jackData.neededQuests;
         this.playerDataList = jackData.playerDataList;
+        this.helmetX = jackData.helmetX;
+        this.helmetY = jackData.helmetY;
+        this.helmetZ = jackData.helmetZ;
+        this.chestplateX = jackData.chestplateX;
+        this.chestplateY = jackData.chestplateY;
+        this.chestplateZ = jackData.chestplateZ;
+        this.helmetX = jackData.helmetX;
+        this.helmetX = jackData.helmetX;
+        this.helmetX = jackData.helmetX;
+        this.helmetX = jackData.helmetX;
+        this.helmetX = jackData.helmetX;
+        this.helmetX = jackData.helmetX;
         instance = this;
     }
 
@@ -146,4 +218,19 @@ public class JackData {
         new JackFileWriter(JouweenConst.JACK_FILEPATH).write(this);
 
     }
+
+    public void switchPlayersCanTakeQuests() {
+        read();
+        playerDataList.forEach(it -> {
+                    if (it.getCurrentQuestId() != 0) {
+                        return;
+                    }
+                    if (!it.isCanTakeQuest()) {
+                        it.setCanTakeQuest(true);
+                    }
+                }
+        );
+        write();
+    }
+
 }
