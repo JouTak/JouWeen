@@ -28,15 +28,18 @@ public class DiamondChestPlateQuest extends AbstractQuest {
         this.id = id;
         this.weight = weight;
         this.reward = reward;
-        this.x= JackData.getInstance().getChestplateX();
-        this.y= JackData.getInstance().getChestplateY();
-        this.z= JackData.getInstance().getChestplateZ();
+        this.x = JackData.getInstance().getChestplateX();
+        this.y = JackData.getInstance().getChestplateY();
+        this.z = JackData.getInstance().getChestplateZ();
     }
 
     @Override
     public TextComponent getDescription() {
         return Component.text()
-                .append(Component.text("Уххх... Я чувствую, что пора готовиться к битве. Нам еще предстоит понять с чем, но ,думаю, что надо запастись броней. Принеси мне пожалуйста целый алмазный нагрудник без зачарований. 1 штуку.", NamedTextColor.DARK_AQUA))
+                .append(Component.text("Уххх... Я чувствую, что пора готовиться к битве. Нам еще предстоит понять с чем, " +
+                        "но, думаю, что надо запастись броней. Принеси мне пожалуйста целый ", NamedTextColor.DARK_AQUA))
+                .append(Component.text("алмазный шлем", NamedTextColor.LIGHT_PURPLE))
+                .append(Component.text(" без зачарований. 1 штуку."))
                 .build();
     }
 
