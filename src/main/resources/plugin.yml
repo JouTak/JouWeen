@@ -1,0 +1,8 @@
+name: JouWeen
+version: '${project.version}'
+main: org.joutak.jouween.JouWeen
+api-version: '1.21'
+load: POSTWORLD
+commands:
+  jouween: {}
+  jack: {}
