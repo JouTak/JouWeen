@@ -18,19 +18,19 @@ import org.joutak.jouween.jack.quests.AbstractQuest;
 
 import java.util.List;
 
-public class DiamondChestPlateQuest extends AbstractQuest {
+public class DiamondHelmetQuest extends AbstractQuest {
 
     int x;
     int y;
     int z;
 
-    public DiamondChestPlateQuest(int id, int weight, int reward) {
+    public DiamondHelmetQuest(int id, int weight, int reward) {
         this.id = id;
         this.weight = weight;
         this.reward = reward;
-        this.x = JackData.getInstance().getChestplateX();
-        this.y = JackData.getInstance().getChestplateY();
-        this.z = JackData.getInstance().getChestplateZ();
+        this.x = JackData.getInstance().getHelmetX();
+        this.y = JackData.getInstance().getHelmetY();
+        this.z = JackData.getInstance().getHelmetZ();
     }
 
     @Override
@@ -45,9 +45,10 @@ public class DiamondChestPlateQuest extends AbstractQuest {
 
     @Override
     public boolean checkQuest(Player player) {
+
         ItemStack playerItem = player.getInventory().getItemInMainHand();
 
-        if (!playerItem.getType().equals(Material.DIAMOND_CHESTPLATE)){
+        if (!playerItem.getType().equals(Material.DIAMOND_HELMET)){
             return false;
         }
 
@@ -67,7 +68,7 @@ public class DiamondChestPlateQuest extends AbstractQuest {
 
         ShulkerBox shulkerBox = (ShulkerBox) block.getState();
 
-        if (shulkerBox.getInventory().contains(Material.DIAMOND_CHESTPLATE, 27)){
+        if (shulkerBox.getInventory().contains(Material.DIAMOND_HELMET, 27)){
             player.sendMessage("Срочно скажи лапитанию проверить сундуки");
             return false;
         }
@@ -92,6 +93,5 @@ public class DiamondChestPlateQuest extends AbstractQuest {
         armorMeta.addEnchant(Enchantment.UNBREAKING,1,false);
         chestItem.setItemMeta(armorMeta);
         shulkerBox.getInventory().addItem(chestItem);
-
     }
 }

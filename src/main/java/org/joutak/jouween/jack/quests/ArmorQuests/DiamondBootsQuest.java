@@ -18,36 +18,37 @@ import org.joutak.jouween.jack.quests.AbstractQuest;
 
 import java.util.List;
 
-public class DiamondChestPlateQuest extends AbstractQuest {
+public class DiamondBootsQuest extends AbstractQuest {
 
     int x;
     int y;
     int z;
 
-    public DiamondChestPlateQuest(int id, int weight, int reward) {
+    public DiamondBootsQuest(int id, int weight, int reward) {
         this.id = id;
         this.weight = weight;
         this.reward = reward;
-        this.x = JackData.getInstance().getChestplateX();
-        this.y = JackData.getInstance().getChestplateY();
-        this.z = JackData.getInstance().getChestplateZ();
+        this.x = JackData.getInstance().getBootsX();
+        this.y = JackData.getInstance().getBootsY();
+        this.z = JackData.getInstance().getBootsZ();
     }
 
     @Override
     public TextComponent getDescription() {
         return Component.text()
                 .append(Component.text("Уххх... Я чувствую, что пора готовиться к битве. Нам еще предстоит понять с чем, " +
-                        "но, думаю, что надо запастись броней. Принеси мне пожалуйста целый ", NamedTextColor.DARK_AQUA))
-                .append(Component.text("алмазный шлем", NamedTextColor.LIGHT_PURPLE))
+                        "но, думаю, что надо запастись броней. Принеси мне пожалуйста целые ", NamedTextColor.DARK_AQUA))
+                .append(Component.text("алмазные ботинки", NamedTextColor.LIGHT_PURPLE))
                 .append(Component.text(" без зачарований. 1 штуку."))
                 .build();
     }
 
     @Override
     public boolean checkQuest(Player player) {
+
         ItemStack playerItem = player.getInventory().getItemInMainHand();
 
-        if (!playerItem.getType().equals(Material.DIAMOND_CHESTPLATE)){
+        if (!playerItem.getType().equals(Material.DIAMOND_BOOTS)){
             return false;
         }
 
@@ -67,7 +68,7 @@ public class DiamondChestPlateQuest extends AbstractQuest {
 
         ShulkerBox shulkerBox = (ShulkerBox) block.getState();
 
-        if (shulkerBox.getInventory().contains(Material.DIAMOND_CHESTPLATE, 27)){
+        if (shulkerBox.getInventory().contains(Material.DIAMOND_BOOTS, 27)){
             player.sendMessage("Срочно скажи лапитанию проверить сундуки");
             return false;
         }
@@ -92,6 +93,5 @@ public class DiamondChestPlateQuest extends AbstractQuest {
         armorMeta.addEnchant(Enchantment.UNBREAKING,1,false);
         chestItem.setItemMeta(armorMeta);
         shulkerBox.getInventory().addItem(chestItem);
-
     }
 }
