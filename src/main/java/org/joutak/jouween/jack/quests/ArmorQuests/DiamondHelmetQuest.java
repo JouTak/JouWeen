@@ -39,7 +39,7 @@ public class DiamondHelmetQuest extends AbstractQuest {
                 .append(Component.text("Уххх... Я чувствую, что пора готовиться к битве. Нам еще предстоит понять с чем, " +
                         "но, думаю, что надо запастись броней. Принеси мне пожалуйста целый ", NamedTextColor.DARK_AQUA))
                 .append(Component.text("алмазный шлем", NamedTextColor.LIGHT_PURPLE))
-                .append(Component.text(" без зачарований. 1 штуку."))
+                .append(Component.text(" без зачарований. 1 штуку.", NamedTextColor.DARK_AQUA))
                 .build();
     }
 
