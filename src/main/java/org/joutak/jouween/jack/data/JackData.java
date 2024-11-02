@@ -10,6 +10,7 @@ import org.joutak.jouween.jack.files.JackFileReader;
 import org.joutak.jouween.jack.files.JackFileWriter;
 import org.joutak.jouween.jack.quests.AbstractQuest;
 import org.joutak.jouween.jack.quests.AllQuests;
+import org.joutak.jouween.jack.quests.QuestNeedToBeStarted;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -140,12 +141,12 @@ public class JackData {
         JackQuestPlayerData playerData = new JackQuestPlayerData();
         playerData.setPlayerName(player.getName());
         playerDataList.add(playerData);
-        new JackFileWriter(JouweenConst.JACK_FILEPATH).write(this);
+        write();
         return playerData;
     }
 
     public AbstractQuest playerGotQuest(Player player) {
-        JackQuestPlayerData jackQuestPlayerData = playerDataList.stream().filter(it -> it.getPlayerName().equals(player.getName())).findFirst().orElse(null);
+        JackQuestPlayerData jackQuestPlayerData = findJackQuestPlayer(player.getName());
 
         if (jackQuestPlayerData == null) {
             player.sendMessage("Ты почему-то не можешь взять квест. Скрины lapitaniy на стол");
@@ -157,6 +158,10 @@ public class JackData {
         jackQuestPlayerData.setCurrentQuestId(abstractQuest.getId());
         jackQuestPlayerData.setSomeQuestInfo(abstractQuest.getSomeInfo());
 
+        if (abstractQuest instanceof QuestNeedToBeStarted){
+            ((QuestNeedToBeStarted) abstractQuest).startQuest(player);
+        }
+
         playerDataList.replaceAll(it -> {
             if (it.equals(jackQuestPlayerData)) {
                 return jackQuestPlayerData;
@@ -164,13 +169,13 @@ public class JackData {
             return it;
         });
 
-        new JackFileWriter(JouweenConst.JACK_FILEPATH).write(this);
+        write();
 
         return abstractQuest;
     }
 
     public void playerCompleteQuest(Player player) {
-        JackQuestPlayerData jackQuestPlayerData = playerDataList.stream().filter(it -> it.getPlayerName().equals(player.getName())).findFirst().orElse(null);
+        JackQuestPlayerData jackQuestPlayerData = findJackQuestPlayer(player.getName());
 
         if (jackQuestPlayerData == null) {
             player.sendMessage("Чета пиздец не так. Ты вроде можешь комплитнуть квест, но почему-то тебя нет в списке. Кто ты и что ты кликнул скриншоты на стол lapitaniy");
@@ -190,12 +195,12 @@ public class JackData {
             return it;
         });
 
-        new JackFileWriter(JouweenConst.JACK_FILEPATH).write(this);
+        write();
 
     }
 
     public void playerDeclineQuest(Player player) {
-        JackQuestPlayerData jackQuestPlayerData = playerDataList.stream().filter(it -> it.getPlayerName().equals(player.getName())).findFirst().orElse(null);
+        JackQuestPlayerData jackQuestPlayerData = findJackQuestPlayer(player.getName());
 
         if (jackQuestPlayerData == null) {
             player.sendMessage("Чета пиздец не так. Ты вроде можешь отказаться от квеста, но почему-то тебя нет в списке. Кто ты и что ты кликнул скриншоты на стол lapitaniy");
@@ -215,7 +220,7 @@ public class JackData {
             return it;
         });
 
-        new JackFileWriter(JouweenConst.JACK_FILEPATH).write(this);
+        write();
 
     }
 
@@ -230,6 +235,21 @@ public class JackData {
                     }
                 }
         );
+        write();
+    }
+
+    public JackQuestPlayerData findJackQuestPlayer(String name){
+        return playerDataList.stream().filter(it -> it.getPlayerName().equals(name)).findFirst().orElse(null);
+    }
+
+    public void replacePlayer(JackQuestPlayerData jackQuestPlayerData){
+        read();
+        playerDataList.replaceAll(it -> {
+            if (it.equals(jackQuestPlayerData)) {
+                return jackQuestPlayerData;
+            }
+            return it;
+        });
         write();
     }
 
