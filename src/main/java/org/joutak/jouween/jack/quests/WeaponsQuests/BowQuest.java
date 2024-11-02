@@ -1,4 +1,4 @@
-package org.joutak.jouween.jack.quests.ArmorQuests;
+package org.joutak.jouween.jack.quests.WeaponsQuests;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -10,35 +10,35 @@ import org.bukkit.block.ShulkerBox;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ArmorMeta;
 import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.joutak.jouween.config.JouWeenConfig;
 import org.joutak.jouween.jack.data.JackData;
 import org.joutak.jouween.jack.quests.AbstractQuest;
 
 import java.util.List;
 
-public class DiamondLeggingsQuest extends AbstractQuest {
+public class BowQuest extends AbstractQuest {
 
     int x;
     int y;
     int z;
 
-    public DiamondLeggingsQuest(int id, int weight, int reward) {
+    public BowQuest(int id, int weight, int reward) {
         this.id = id;
         this.weight = weight;
         this.reward = reward;
-        this.x = JackData.getInstance().getPantsX();
-        this.y = JackData.getInstance().getPantsY();
-        this.z = JackData.getInstance().getPantsZ();
+        this.x = JackData.getInstance().getBowX();
+        this.y = JackData.getInstance().getBowY();
+        this.z = JackData.getInstance().getBowZ();
     }
 
     @Override
     public TextComponent getDescription() {
         return Component.text()
                 .append(Component.text("Уххх... Я чувствую, что пора готовиться к битве. Нам еще предстоит понять с чем, " +
-                        "но, думаю, что надо запастись броней. Принеси мне пожалуйста целые ", NamedTextColor.DARK_AQUA))
-                .append(Component.text("алмазные поножи", NamedTextColor.LIGHT_PURPLE))
+                        "но, думаю, что надо запастись оружием. Принеси мне пожалуйста целый ", NamedTextColor.DARK_AQUA))
+                .append(Component.text("лук", NamedTextColor.LIGHT_PURPLE))
                 .append(Component.text(" без зачарований. 1 штуку.", NamedTextColor.DARK_AQUA))
                 .build();
     }
@@ -48,14 +48,14 @@ public class DiamondLeggingsQuest extends AbstractQuest {
 
         ItemStack playerItem = player.getInventory().getItemInMainHand();
 
-        if (!playerItem.getType().equals(Material.DIAMOND_LEGGINGS)){
+        if (!playerItem.getType().equals(Material.BOW)){
             return false;
         }
 
-        ArmorMeta armorMeta = (ArmorMeta) playerItem.getItemMeta();
+        ItemMeta itemMeta = playerItem.getItemMeta();
         Damageable damageable = (Damageable) playerItem.getItemMeta();
 
-        if (!(armorMeta.getEnchants().isEmpty()&&!damageable.hasDamage())){
+        if (!(itemMeta.getEnchants().isEmpty()&&!damageable.hasDamage())){
             return false;
         }
 
@@ -68,7 +68,7 @@ public class DiamondLeggingsQuest extends AbstractQuest {
 
         ShulkerBox shulkerBox = (ShulkerBox) block.getState();
 
-        if (shulkerBox.getInventory().contains(Material.DIAMOND_LEGGINGS, 27)){
+        if (shulkerBox.getInventory().contains(Material.BOW, 27)){
             player.sendMessage("Срочно скажи лапитанию проверить сундуки");
             return false;
         }
@@ -87,11 +87,11 @@ public class DiamondLeggingsQuest extends AbstractQuest {
         ShulkerBox shulkerBox = (ShulkerBox) block.getState();
 
         playerItem.setAmount(0);
-        ArmorMeta armorMeta = (ArmorMeta) chestItem.getItemMeta();
-        armorMeta.lore(List.of(Component.text("Сделано ручками " + player.getName())));
-        armorMeta.addEnchant(Enchantment.PROTECTION,1,false);
-        armorMeta.addEnchant(Enchantment.UNBREAKING,1,false);
-        chestItem.setItemMeta(armorMeta);
+        ItemMeta itemMeta = chestItem.getItemMeta();
+        itemMeta.lore(List.of(Component.text("Сделано ручками " + player.getName())));
+        itemMeta.addEnchant(Enchantment.POWER,1,false);
+        itemMeta.addEnchant(Enchantment.UNBREAKING,1,false);
+        chestItem.setItemMeta(itemMeta);
         shulkerBox.getInventory().addItem(chestItem);
     }
 }

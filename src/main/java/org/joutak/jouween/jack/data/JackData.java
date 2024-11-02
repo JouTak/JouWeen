@@ -110,6 +110,66 @@ public class JackData {
     @Setter
     public int bootsZ = 0;
 
+    @Expose
+    @Getter
+    @Setter
+    public int swordX = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int swordY = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int swordZ = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int bowX = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int bowY = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int bowZ = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int arrowsX = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int arrowsY = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int arrowsZ = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int breadX = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int breadY = 0;
+
+    @Expose
+    @Getter
+    @Setter
+    public int breadZ = 0;
+
     public void read() {
         JackData jackData = new JackFileReader(JouweenConst.JACK_FILEPATH).readJack();
         this.x = jackData.x;
