@@ -7,7 +7,7 @@ import java.util.List;
 
 public class AllQuests {
 
-    private static int weightSum = 1;
+    private static int weightSum = 2;
 
     private static List<AbstractQuest> quests = new ArrayList<>();
 

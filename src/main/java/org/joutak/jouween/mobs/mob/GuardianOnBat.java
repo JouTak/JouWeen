@@ -49,6 +49,7 @@ public class GuardianOnBat extends CustomMob {
         transport.setRemoveWhenFarAway(true);
 
         transport.addPassenger(mob);
+        mob.setCanPickupItems(false);
 
         return transport;
     }

@@ -36,6 +36,7 @@ public class WitchOnPhantom extends CustomMob {
         mob.customName(textComponent);
         mob.setCustomNameVisible(true);
         mob.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, PotionEffect.INFINITE_DURATION, luckId, false, false));
+        mob.setCanPickupItems(false);
 
 
         Phantom transport = (Phantom) location.getWorld().spawnEntity(location, EntityType.PHANTOM, CreatureSpawnEvent.SpawnReason.COMMAND);

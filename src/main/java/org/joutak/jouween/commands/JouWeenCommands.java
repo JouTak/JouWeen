@@ -8,12 +8,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
+import org.joutak.jouween.JouWeen;
 import org.joutak.jouween.config.JouWeenConfig;
 import org.joutak.jouween.config.JouweenConst;
 import org.joutak.jouween.jack.Jack;
 import org.joutak.jouween.jack.data.JackData;
 import org.joutak.jouween.jack.files.JackFileWriter;
 import org.joutak.jouween.mobs.AllMobTypes;
+import org.joutak.jouween.mobs.CustomMobsKiller;
 
 public class JouWeenCommands extends AbstractCommand{
 
@@ -56,6 +58,11 @@ public class JouWeenCommands extends AbstractCommand{
 
         if (args[0].equals("jack")){
             jack(playerSender, args);
+            return;
+        }
+
+        if (args[0].equals("kill")){
+            kill(playerSender, args);
             return;
         }
     }
@@ -104,5 +111,9 @@ public class JouWeenCommands extends AbstractCommand{
             jackFileWriter.write(JackData.getInstance());
             Jack.create();
         }
+    }
+
+    private void kill(Player player, String[] args){
+        new CustomMobsKiller().killCustomMobs();
     }
 }

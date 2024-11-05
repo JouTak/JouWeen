@@ -64,6 +64,7 @@ public class NormalZombie extends CustomMob {
         mob.getEquipment().setChestplate(chestPlate);
         mob.getEquipment().setLeggings(leggings);
         mob.getEquipment().setBoots(boots);
+        mob.setCanPickupItems(false);
 
         return mob;
     }

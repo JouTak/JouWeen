@@ -58,7 +58,7 @@ public class ArrowsQuest extends AbstractQuest {
 
         ShulkerBox shulkerBox = (ShulkerBox) block.getState();
 
-        if (shulkerBox.getInventory().contains(Material.ARROW, 27)){
+        if (shulkerBox.getInventory().contains(Material.ARROW, 27 * 64)){
             player.sendMessage("Срочно скажи лапитанию проверить сундуки");
             return false;
         }

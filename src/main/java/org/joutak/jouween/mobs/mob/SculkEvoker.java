@@ -43,6 +43,9 @@ public class SculkEvoker extends CustomMob {
         mob.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, PotionEffect.INFINITE_DURATION, luckId, false, false));
 
         mob.setSpell(Spellcaster.Spell.SUMMON_VEX);
+        mob.setCanPickupItems(false);
+        mob.setCanJoinRaid(false);
+        mob.setTicksOutsideRaid(20);
 
         return mob;
     }

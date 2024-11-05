@@ -48,6 +48,11 @@ public class JackData {
 
     @Expose
     @Getter
+    @Setter
+    public boolean isFirstAllBottlesComplete = false;
+
+    @Expose
+    @Getter
     public List<JackQuestPlayerData> playerDataList = new ArrayList<>();
 
     @Expose
@@ -177,6 +182,7 @@ public class JackData {
         this.z = jackData.z;
         this.completedQuests = jackData.completedQuests;
         this.neededQuests = jackData.neededQuests;
+        this.isFirstAllBottlesComplete = jackData.isFirstAllBottlesComplete;
         this.playerDataList = jackData.playerDataList;
         this.helmetX = jackData.helmetX;
         this.helmetY = jackData.helmetY;
@@ -184,12 +190,24 @@ public class JackData {
         this.chestplateX = jackData.chestplateX;
         this.chestplateY = jackData.chestplateY;
         this.chestplateZ = jackData.chestplateZ;
-        this.helmetX = jackData.helmetX;
-        this.helmetX = jackData.helmetX;
-        this.helmetX = jackData.helmetX;
-        this.helmetX = jackData.helmetX;
-        this.helmetX = jackData.helmetX;
-        this.helmetX = jackData.helmetX;
+        this.pantsX = jackData.pantsX;
+        this.pantsY = jackData.pantsY;
+        this.pantsZ = jackData.pantsZ;
+        this.bootsX = jackData.bootsX;
+        this.bootsY = jackData.bootsY;
+        this.bootsZ = jackData.bootsZ;
+        this.swordX = jackData.swordX;
+        this.swordY = jackData.swordY;
+        this.swordZ = jackData.swordZ;
+        this.bowX = jackData.bowX;
+        this.bowY = jackData.bowY;
+        this.bowZ = jackData.bowZ;
+        this.arrowsX = jackData.arrowsX;
+        this.arrowsY = jackData.arrowsY;
+        this.arrowsZ = jackData.arrowsZ;
+        this.breadX = jackData.breadX;
+        this.breadY = jackData.breadY;
+        this.breadZ = jackData.breadZ;
         instance = this;
     }
 

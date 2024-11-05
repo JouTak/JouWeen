@@ -729,7 +729,7 @@ public class JackDialogues {
         TextComponent loreRoot = makeBackComponent(3, "loreRoot");
 
         TextComponent textComponent = Component.text()
-                .append(Component.text("Ха-ха, я Джек спасибо что поинтересовался, но я не знакомлюсь.", NamedTextColor.DARK_AQUA))
+                .append(Component.text("Ага, конечно могу! Только у меня одного это займет примерно... Один...", NamedTextColor.DARK_AQUA))
                 .appendNewline()
                 .append(Component.text("чтобы перейти дальше, клинки по одному из сообщений ниже", NamedTextColor.DARK_GRAY))
                 .appendNewline()

@@ -81,6 +81,7 @@ public class StrongZombie extends CustomMob {
 
         mob.getEquipment().setItemInMainHand(ironAxe);
         mob.getEquipment().setItemInOffHand(shield);
+        mob.setCanPickupItems(false);
 
         return mob;
     }

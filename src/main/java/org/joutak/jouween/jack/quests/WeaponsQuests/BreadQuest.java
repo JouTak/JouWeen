@@ -57,7 +57,7 @@ public class BreadQuest extends AbstractQuest {
 
         ShulkerBox shulkerBox = (ShulkerBox) block.getState();
 
-        if (shulkerBox.getInventory().contains(Material.BREAD, 27)){
+        if (shulkerBox.getInventory().contains(Material.BREAD, 27 * 64)){
             player.sendMessage("Срочно скажи лапитанию проверить сундуки");
             return false;
         }

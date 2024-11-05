@@ -87,7 +87,10 @@ public class SkeletonOnHorse extends CustomMob {
         SkeletonHorse transport = (SkeletonHorse) location.getWorld().spawnEntity(location, EntityType.SKELETON_HORSE, CreatureSpawnEvent.SpawnReason.COMMAND);
         transport.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2));
         transport.setTamed(true);
+        mob.setRemoveWhenFarAway(true);
         transport.setRemoveWhenFarAway(true);
+
+        mob.setCanPickupItems(false);
 
         transport.addPassenger(mob);
 

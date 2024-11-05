@@ -23,7 +23,7 @@ public class PhantomMembranes extends AbstractQuest {
         return Component.text()
                 .append(Component.text("Нет времени объяснять, мне нужны мембраны фантомов. Принеси мне ", NamedTextColor.DARK_AQUA))
                 .append(Component.text(MEMBRANE_AMOUNT, NamedTextColor.GOLD))
-                .append(Component.text(" 3 штуки. Задание я тебе дал, а теперь беги, Форест, беги!", NamedTextColor.DARK_AQUA))
+                .append(Component.text(" штуки. Задание я тебе дал, а теперь беги, Форест, беги!", NamedTextColor.DARK_AQUA))
                 .build();
     }
 
