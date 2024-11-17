@@ -117,6 +117,10 @@ public class JouWeenCommands extends AbstractCommand {
     }
 
     private void boss(Player player, String[] args) {
+
+        JackBossData.getInstance().read();
+        System.out.println(JackBossData.getInstance());
+
         if (args[1].equals("start")){
             JackBoss.getInstance().start();
             return;
@@ -150,5 +154,10 @@ public class JouWeenCommands extends AbstractCommand {
         if (args[1].equals("wave")){
             JackBoss.getInstance().spawnWave();
         }
+
+        if (args[1].equals("activate")){
+            JackBoss.getInstance().activateBoss();
+        }
+
     }
 }

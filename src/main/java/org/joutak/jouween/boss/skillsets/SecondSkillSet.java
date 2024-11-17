@@ -8,7 +8,10 @@ import org.bukkit.boss.BarColor;
 import org.bukkit.entity.*;
 import org.bukkit.util.Vector;
 import org.joutak.jouween.JouWeen;
+import org.joutak.jouween.Utils;
 import org.joutak.jouween.boss.JackBoss;
+import org.joutak.jouween.boss.JackBossData;
+import org.joutak.jouween.mobs.AllMobTypes;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -16,7 +19,6 @@ import java.util.Objects;
 public class SecondSkillSet implements CurrSkillSet {
 
     public SecondSkillSet() {
-        JackBoss.getInstance().getBossBar().setColor(BarColor.WHITE);
     }
 
     @Override
@@ -38,7 +40,7 @@ public class SecondSkillSet implements CurrSkillSet {
         ) {
             Location loc = player.getLocation();
 
-            AreaEffectCloud areaEffectCloud = (AreaEffectCloud) Objects.requireNonNull(Bukkit.getWorld("world")).spawnEntity(loc, EntityType.AREA_EFFECT_CLOUD);
+            AreaEffectCloud areaEffectCloud = (AreaEffectCloud) Objects.requireNonNull(Bukkit.getWorld(JackBossData.getInstance().getBossWorldName())).spawnEntity(loc, EntityType.AREA_EFFECT_CLOUD);
             areaEffectCloud.setColor(Color.RED);
             areaEffectCloud.setParticle(Particle.DAMAGE_INDICATOR);
             areaEffectCloud.setRadius(1.5F);
@@ -49,7 +51,7 @@ public class SecondSkillSet implements CurrSkillSet {
                 Vector vector = new Vector();
                 vector.setY(-2);
                 loc.setDirection(vector);
-                Fireball fireball = (Fireball) Objects.requireNonNull(Bukkit.getWorld("world")).spawnEntity(loc, EntityType.FIREBALL);
+                Fireball fireball = (Fireball) Objects.requireNonNull(Bukkit.getWorld(JackBossData.getInstance().getBossWorldName())).spawnEntity(loc, EntityType.FIREBALL);
 
                 fireball.setYield(3F);
             }, 60);
@@ -80,7 +82,7 @@ public class SecondSkillSet implements CurrSkillSet {
             loc.setX(x1);
             loc.setZ(z1);
 
-            Location location = new Location(Bukkit.getWorld("world"), x1, loc.getY(), z1);
+            Location location = new Location(Bukkit.getWorld(JackBossData.getInstance().getBossWorldName()), x1, loc.getY(), z1);
 
             Vector vector = new Vector();
 
@@ -95,7 +97,7 @@ public class SecondSkillSet implements CurrSkillSet {
             final WitherSkull[] witherSkull = new WitherSkull[1];
 
             Bukkit.getScheduler().scheduleSyncDelayedTask(JouWeen.getInstance(), () -> {
-                witherSkull[0] = (WitherSkull) Objects.requireNonNull(Bukkit.getWorld("world")).spawnEntity(location, EntityType.WITHER_SKULL);
+                witherSkull[0] = (WitherSkull) Objects.requireNonNull(Bukkit.getWorld(JackBossData.getInstance().getBossWorldName())).spawnEntity(location, EntityType.WITHER_SKULL);
                 witherSkull[0].setGravity(false);
             }, 5 * i);
         }
@@ -105,15 +107,13 @@ public class SecondSkillSet implements CurrSkillSet {
     @Override
     public void summonSkill() {
 
-        //vindicators
-
-        ArrayList<Player> players = getAllNearPlayers();
-
-        if (players.isEmpty()) return;
-
-        for (int i = 0; i < 1 + (players.size() / 2); i++) {
-            Objects.requireNonNull(Bukkit.getWorld("world")).spawnEntity(JackBoss.getInstance().getJackBossWitherSkeleton().getLocation(), EntityType.VINDICATOR);
-        }
+        JackBossData.getInstance().getBossSummonLocations().forEach(
+                it -> {
+                    for (int i = 0; i < 1; i++) {
+                        AllMobTypes.spawnRandomMob(Utils.getLocation(Bukkit.getWorld(JackBossData.getInstance().bossWorldName), it));
+                    }
+                }
+        );
 
     }
 

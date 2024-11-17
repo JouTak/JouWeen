@@ -6,6 +6,7 @@ import org.bukkit.GameRule;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.joutak.jouween.boss.JackBoss;
 import org.joutak.jouween.boss.JackBossData;
+import org.joutak.jouween.boss.events.JackBossEvents;
 import org.joutak.jouween.commands.JackDialogueCommands;
 import org.joutak.jouween.commands.JouWeenCommands;
 import org.joutak.jouween.config.JouWeenConfig;
@@ -56,6 +57,7 @@ public final class JouWeen extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new MobPhaseEntityKillsEntityEvent(), this);
         Bukkit.getPluginManager().registerEvents(new RaidCompleteEvent(), this);
         Bukkit.getPluginManager().registerEvents(new KillSkeletonOnHorseEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new JackBossEvents(), this);
 
         new JouWeenCommands();
         new JackDialogueCommands();
@@ -66,13 +68,13 @@ public final class JouWeen extends JavaPlugin {
         new CustomMobsKiller().registerMobKiller();
         new JackBoss();
 
+        JackBossData.createJackBossData();
+        JackBossData.getInstance().read();
+
         addMobs();
         addQuests();
 
         doAfterStart();
-
-        JackBossData.createJackBossData();
-        JackBossData.getInstance().write();
 
     }
 

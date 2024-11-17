@@ -9,7 +9,10 @@ import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import org.joutak.jouween.JouWeen;
+import org.joutak.jouween.Utils;
 import org.joutak.jouween.boss.JackBoss;
+import org.joutak.jouween.boss.JackBossData;
+import org.joutak.jouween.mobs.AllMobTypes;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -17,9 +20,6 @@ import java.util.Objects;
 public class FourthSkillSet implements CurrSkillSet {
 
     public FourthSkillSet() {
-
-        JackBoss.getInstance().getBossBar().setColor(BarColor.PURPLE);
-
     }
 
     @Override
@@ -41,7 +41,7 @@ public class FourthSkillSet implements CurrSkillSet {
         ) {
             Location loc = player.getLocation();
 
-            LightningStrike lightningStrike = (LightningStrike) Objects.requireNonNull(Bukkit.getWorld("world")).spawnEntity(loc, EntityType.LIGHTNING_BOLT);
+            LightningStrike lightningStrike = (LightningStrike) Objects.requireNonNull(Bukkit.getWorld(JackBossData.getInstance().getBossWorldName())).spawnEntity(loc, EntityType.LIGHTNING_BOLT);
             lightningStrike.setFlashCount(5);
         }
 
@@ -72,7 +72,7 @@ public class FourthSkillSet implements CurrSkillSet {
                     loc.setX(x1);
                     loc.setZ(z1);
 
-                    Location location = new Location(Bukkit.getWorld("world"), x1, loc.getY(), z1);
+                    Location location = new Location(Bukkit.getWorld(JackBossData.getInstance().getBossWorldName()), x1, loc.getY(), z1);
 
                     Vector vector = new Vector();
 
@@ -82,7 +82,7 @@ public class FourthSkillSet implements CurrSkillSet {
 
                     location.setDirection(vector);
 
-                    EvokerFangs evokerFangs = (EvokerFangs) Objects.requireNonNull(Bukkit.getWorld("world")).spawnEntity(location, EntityType.EVOKER_FANGS);
+                    EvokerFangs evokerFangs = (EvokerFangs) Objects.requireNonNull(Bukkit.getWorld(JackBossData.getInstance().getBossWorldName())).spawnEntity(location, EntityType.EVOKER_FANGS);
 
                     angle[0] += 40;
                 }
@@ -95,15 +95,13 @@ public class FourthSkillSet implements CurrSkillSet {
     @Override
     public void summonSkill() {
 
-        //vindicators
-
-        ArrayList<Player> players = getAllNearPlayers();
-
-        if (players.isEmpty()) return;
-
-        for (int i = 0; i < 1 + (players.size() / 2); i++) {
-            Objects.requireNonNull(Bukkit.getWorld("world")).spawnEntity(JackBoss.getInstance().getJackBossWitherSkeleton().getLocation(), EntityType.VINDICATOR);
-        }
+        JackBossData.getInstance().getBossSummonLocations().forEach(
+                it -> {
+                    for (int i = 0; i < 4; i++) {
+                        AllMobTypes.spawnRandomMob(Utils.getLocation(Bukkit.getWorld(JackBossData.getInstance().bossWorldName), it));
+                    }
+                }
+        );
     }
 
     @Override

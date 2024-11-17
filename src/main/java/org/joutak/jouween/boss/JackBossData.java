@@ -3,7 +3,10 @@ package org.joutak.jouween.boss;
 import com.google.gson.annotations.Expose;
 import lombok.Data;
 import lombok.Getter;
+import org.joutak.jouween.JouWeen;
+import org.joutak.jouween.config.JouWeenConfig;
 import org.joutak.jouween.config.JouweenConst;
+import org.joutak.jouween.jack.files.JackFileReader;
 import org.joutak.jouween.jack.files.JackFileWriter;
 
 import java.util.ArrayList;
@@ -30,7 +33,7 @@ public class JackBossData {
     public List<XYZLocation> bossSummonLocations = List.of();
 
     @Expose
-    public Map<XYZLocation, Boolean> mobSpawnLocations = Map.of();
+    public List<XYZLocation> mobSpawnLocations = List.of();
 
     @Expose
     public XYZLocation portalLocation = new XYZLocation();
@@ -48,13 +51,17 @@ public class JackBossData {
         new JackFileWriter(JouweenConst.BOSS_FILEPATH).writeJackBoss(this);
     }
 
+    public void read() {
+        instance = new JackFileReader(JouweenConst.BOSS_FILEPATH).readJackBoss();
+    }
+
     public void addBossSummonLocation(XYZLocation location){
         bossSummonLocations.add(location);
         write();
     }
 
     public void addMobSpawnLocations(XYZLocation location){
-        mobSpawnLocations.put(location, false);
+        mobSpawnLocations.add(location);
         write();
     }
 

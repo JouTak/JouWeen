@@ -4,7 +4,9 @@ import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonObject;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.joutak.jouween.boss.XYZLocation;
 
 public class Utils {
 
@@ -19,7 +21,7 @@ public class Utils {
             }
 
             distance = getDistance(player.getLocation(), location);
-            if (distance<minDist){
+            if (distance < minDist) {
                 minDist = distance;
                 nearestPlayer = player;
             }
@@ -39,6 +41,10 @@ public class Utils {
         } catch (Exception e) {
             return "";
         }
+    }
+
+    public static Location getLocation(World world, XYZLocation xyzLocation) {
+        return new Location(world, xyzLocation.getX(), xyzLocation.getY(), xyzLocation.getZ());
     }
 
 //    public static boolean is
