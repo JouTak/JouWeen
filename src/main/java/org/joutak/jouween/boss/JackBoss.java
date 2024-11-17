@@ -19,9 +19,7 @@ import org.bukkit.scoreboard.Team;
 import org.joutak.jouween.JouWeen;
 import org.joutak.jouween.mobs.AllMobTypes;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Data
 public class JackBoss {
@@ -133,7 +131,33 @@ public class JackBoss {
     }
 
     public void spawnCaveMonsters(){
-
+        Collection<? extends Player> players = Bukkit.getServer().getOnlinePlayers();
+        Map<XYZLocation, Boolean> locations = JackBossData.getInstance().mobSpawnLocations;
+        players.stream().forEach(player -> {
+            locations.entrySet().stream()
+                    .filter(entry -> !entry.getValue()) // Фильтруем только не занятые локации
+                    .map(entry -> {
+                        double distance = utils.getDistance(player.getLocation(),
+                                Bukkit.getWorld(JackBossData.getInstance().getBossWorldName()).getBlockAt(
+                                                                        (int)entry.getKey().getX(),
+                                                                        (int)entry.getKey().getY(),
+                                                                        (int)entry.getKey().getZ()));
+                        return new AbstractMap.SimpleEntry<>(distance, entry);
+                    })
+                    .filter(entry -> entry.getKey() <= 10)
+                    .min(Map.Entry.comparingByKey())
+                    .map(Map.Entry::getValue)
+                    .ifPresent(closestEntry -> {
+                        closestEntry.setValue(true);
+                        for(byte i=0; i<10; i++){
+                            AllMobTypes.spawnRandomMob(new Location(
+                                    Bukkit.getWorld(JackBossData.getInstance().getBossWorldName()),
+                                    closestEntry.getKey().getX(),
+                                    closestEntry.getKey().getY(),
+                                    closestEntry.getKey().getZ()));
+                        }
+                    });
+        });
     }
 
     public void damageBoss() {
