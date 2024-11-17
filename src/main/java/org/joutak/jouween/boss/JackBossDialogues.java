@@ -18,7 +18,7 @@ public class JackBossDialogues {
 
     public static void do_death_dialogue() {
         for (Player player: Bukkit.getServer().getOnlinePlayers()){
-            System.out.println("Nas lishili Dindi");
+            sayDeathLines(player);
         }
     }
 
@@ -73,9 +73,30 @@ public class JackBossDialogues {
 
     public static void sayDeathLines(Player player) {
 
+        TextComponent firstLine = Component.text()
+                .append(Component.text("Кхе... Кхе... Кхе...", NamedTextColor.DARK_RED))
+                .build();
+
+        TextComponent firstSubLine = Component.text()
+                .append(Component.text("Вы оказались сильнее чем я думал", NamedTextColor.DARK_PURPLE))
+                .build();
+
+        Title firstTitle = Title.title(firstLine, firstSubLine);
+
+        TextComponent secondLine = Component.text()
+                .append(Component.text("Я ещё отомщу!..", NamedTextColor.RED))
+                .build();
+
+        Title secondTitle = Title.title(secondLine, getBlankComponent());
+
+        player.showTitle(firstTitle);
+
+        Bukkit.getScheduler().scheduleSyncDelayedTask(JouWeen.getInstance(), () -> {
+            player.showTitle(secondTitle);
+        }, 120);
     }
 
     public static TextComponent getBlankComponent() {
-        return (TextComponent) Component.text().build();
+        return Component.text().build();
     }
 }
