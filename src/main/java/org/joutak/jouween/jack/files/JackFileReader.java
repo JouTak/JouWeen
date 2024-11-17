@@ -2,6 +2,7 @@ package org.joutak.jouween.jack.files;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.joutak.jouween.boss.JackBossData;
 import org.joutak.jouween.jack.data.JackData;
 import org.joutak.jouween.jack.data.JackQuestPlayerData;
 
@@ -38,6 +39,17 @@ public class JackFileReader {
 
         JackData jackData = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create().fromJson(json, JackData.class);
         return jackData;
+    }
+
+    public JackBossData readJackBoss(){
+        String json;
+        try {
+            json = Files.readString(Paths.get(filepath));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create().fromJson(json, JackBossData.class);
     }
 
 }

@@ -237,7 +237,7 @@ public class JackDialogues {
 
         if (!playerData.isCanTakeQuest()) {
             TextComponent textComponent = Component.text()
-                    .append(Component.text("Ты пока не можешь взять новый квест. Выполни предыдущий или подожди полночь.", NamedTextColor.DARK_AQUA))
+                    .append(Component.text("Ты пока не можешь взять новый квест. Выполни предыдущий, после чего подожди полночь.", NamedTextColor.DARK_AQUA))
                     .appendNewline()
                     .append(Component.text("чтобы перейти дальше, клинки по одному из сообщений ниже", NamedTextColor.DARK_GRAY))
                     .appendNewline()

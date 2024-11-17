@@ -3,6 +3,7 @@ package org.joutak.jouween.mobs;
 import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class AllMobTypes {
         weightSum += mob.getWeight();
     }
 
-    public static Entity spawnRandomMob(Location location) {
+    public static LivingEntity spawnRandomMob(Location location) {
         int randomNumber = (int) Math.ceil(Math.random() * weightSum);
         int curr = 0;
         while (randomNumber > 0) {

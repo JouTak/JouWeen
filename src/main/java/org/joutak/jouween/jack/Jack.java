@@ -90,8 +90,8 @@ public class Jack {
         return instance;
     }
 
-    public static Jack create() {
-        return new Jack();
+    public static void create() {
+        new Jack();
     }
 
 }

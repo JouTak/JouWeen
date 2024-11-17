@@ -2,7 +2,10 @@ package org.joutak.jouween;
 
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.GameRule;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.joutak.jouween.boss.JackBoss;
+import org.joutak.jouween.boss.JackBossData;
 import org.joutak.jouween.commands.JackDialogueCommands;
 import org.joutak.jouween.commands.JouWeenCommands;
 import org.joutak.jouween.config.JouWeenConfig;
@@ -61,11 +64,15 @@ public final class JouWeen extends JavaPlugin {
         new JouWeenConfig().read();
         new MoonSwitcher().register();
         new CustomMobsKiller().registerMobKiller();
+        new JackBoss();
 
         addMobs();
         addQuests();
 
         doAfterStart();
+
+        JackBossData.createJackBossData();
+        JackBossData.getInstance().write();
 
     }
 
